@@ -7,6 +7,7 @@ pipeline {
     }
     environment {
         registry = "orantoine/fortnite-front"
+        registryCredential = 'dockerhub'
         HOME = '.'
     }
     stages {
@@ -18,9 +19,23 @@ pipeline {
         stage('Post'){
             steps{
                 script {
-                        dockerImage = docker.build registry + ":"+VERSION
+                        dockerImage = docker.build registry + ":latest
                 }
             }
         }
+        stage('Deploy Image') {
+                  steps{
+                    script {
+                      docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                      }
+                    }
+                  }
+                }
+                stage('Remove Unused docker image') {
+                  steps{
+                     sh "docker rmi $registry:latest"
+                  }
+                }
     }
 }
