@@ -1,7 +1,8 @@
 <template>
   <div class="counter">
-    {{ count }}
-    <div class="button" @click="increments">clique-ici</div>
+    <p>{{ count }}</p>
+
+    <div class="btn btn-danger" @click="increments">clique-ici</div>
   </div>
 
 </template>
