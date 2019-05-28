@@ -1,5 +1,6 @@
 pipeline {
     agent {
+      any,
       docker{
         image 'node:6-alpine'
         args '-p 3000:3000'
@@ -17,6 +18,7 @@ pipeline {
             }
         }
         stage('Post'){
+            agent any
             steps{
                 script {
                         dockerImage = docker.build registry + ":latest"
@@ -24,18 +26,19 @@ pipeline {
             }
         }
         stage('Deploy Image') {
-                  steps{
-                    script {
-                      docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                      }
-                    }
-                  }
+            agent any
+            steps{
+              script {
+                docker.withRegistry( '', registryCredential ) {
+                  dockerImage.push()
                 }
-                stage('Remove Unused docker image') {
-                  steps{
-                     sh "docker rmi $registry:latest"
-                  }
-                }
+              }
+            }
+        }
+        stage('Remove Unused docker image') {
+          steps{
+             sh "docker rmi $registry:latest"
+          }
+        }
     }
 }
