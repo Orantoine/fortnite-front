@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
+
 .main_user{
-  background-color: #7a7a7a;
+  padding: 10px;
+  background-color: #4081c1;
   color: white;
 }
 
 .list-background{
-  background-color: #7a7a7a;
+  background-color: #4081c1;
+}
+
+.pseudo{
+  font-family: 'Permanent Marker', cursive;
+  color :#ecd766;
 }

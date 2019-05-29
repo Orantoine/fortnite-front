@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Fortnite Statistiques</h1>
     <ul class="col-lg-12 list-inline"  >
       <li v-on:click="detail(name.name)" v-for="name in userList" >
         <user class="list-inline-item" v-bind:key="name.key" :user_name="name.name" ></user>
@@ -14,9 +15,8 @@
   import Counter from './composants/Counter.vue';
   import User from './composants/User.vue';
   import Detail from './composants/Detail.vue';
-  import Match from './composants/Match.vue';
 export default {
-  components : {Counter, User,Detail,Match},
+  components : {Counter, User,Detail},
   name: 'app',
   data () {
     return {
@@ -39,33 +39,6 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style src="./styles/app.css">
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
-  @import "~bootstrap/dist/css/bootstrap.css";
 </style>

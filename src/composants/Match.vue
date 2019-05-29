@@ -1,24 +1,33 @@
 <template>
   <div class="matchs">
-    <ol class="col-lg-12">
-      <li>Match id : {{user_match.id}}</li>
-      <li>Nombres de matchs : {{user_match.matches}}</li>
-      <li>Kills: {{user_match.kills}}</li>
-      <li>Ratio: {{user_match.ratio}}</li>
-      <li>Mode : {{user_match.playlist}}</li>
-      <li>Date : {{user_match.dateCollected}}</li>
-      <li></li>
+    <ol class="list-group">
+      <li class="list-group-item" v-for="match in list_match">
+        <ul>
+          <li>Match id :{{match.id}}</li>
+          <li>Kills : {{match.kills}}</li>
+          <li>Nombre de matchs : {{match.matches}}</li>
+          <li>Mode de jeu : {{match.playlist}}</li>
+          <li> Ratio : {{match.ratio}}</li>
+          <li v-show="match.top1 > 0"><img src="../assets/victoire.png"></li>
+        </ul>
+      </li>
     </ol>
   </div>
+
 </template>
 
 <script>
   export default {
-    props: ['user_match'],
+    props: ['list_match'],
     data() {
       return {
         message: "test",
-        user_matchs: []
+        listes_match : this.list_match
+      }
+    },
+    methods : {
+      vue_match(){
+        this.see_match = !this.see_match;
       }
     }
   }

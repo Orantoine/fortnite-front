@@ -1,8 +1,8 @@
 <template>
 <div id="detail">
-  <h2> Détail de : {{user_pseudo}}</h2>
+  <h1 class="title"> Détail de : {{user_pseudo}}</h1>
   <ol class="list-group">
-    <li class="list-group-item" v-bind:class="classLine(matchs)" v-for="matchs in user_matchs"><match  v-bind:key="matchs.id" :user_match="matchs"></match></li>
+    <li class="list-group-item" v-bind:class="classLine(day)" v-for="day in user_data"><day  v-bind:key="day.id" :user_day="day"></day></li>
   </ol>
 </div>
 </template>
@@ -11,9 +11,10 @@
 <script>
 
   import Match from "./Match.vue";
+  import Day from "./Day.vue";
 
   export default {
-    components : {Match},
+    components : {Match, Day},
     props: ['user_name'],
     data() {
       return {
@@ -35,7 +36,7 @@
     methods : {
       classLine: function (matchs) {
         return  {
-          "list-group-item-success": matchs.top1 > 0
+          "list-group-item-success": matchs.wins > 0
         }
       }
     }
