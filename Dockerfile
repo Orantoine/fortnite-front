@@ -1,23 +1,12 @@
-FROM node:10.9-slim
-
-# installe un simple serveur http pour servir un contenu statique
-RUN npm install -g http-server
-
-# définit le dossier 'app' comme dossier de travail
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-
-# copie 'package.json' et 'package-lock.json' (si disponible)
 COPY package*.json ./
-
-# installe les dépendances du projet
 RUN npm install
-RUN npm i -g @vue/cli
-
-# copie les fichiers et dossiers du projet dans le dossier de travail (par exemple : le dossier 'app')
 COPY . .
-
-# construit l'app pour la production en la minifiant
 RUN npm run build
 
-EXPOSE 8070
-CMD [ "npm", "run", "dev" ]
+# étape de production
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
