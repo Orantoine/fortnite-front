@@ -1,8 +1,6 @@
 pipeline {
     agent {
-      docker{
-        image 'node'
-      }
+      any
     }
     environment {
         registry = "orantoine/fortnite-front"
@@ -10,7 +8,7 @@ pipeline {
         HOME = '.'
     }
     stages {
-               stage ('Build') {
+        stage ('Build') {
             steps {
                 sh 'npm install --ignore-scripts'
             }
