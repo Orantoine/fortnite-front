@@ -1,7 +1,7 @@
 FROM node:lts-alpine
 
 # installe un simple serveur http pour servir un contenu statique
-RUN npm install -g http-server
+RUN npm install -g @vue/cli
 
 # définit le dossier 'app' comme dossier de travail
 WORKDIR /app
@@ -19,4 +19,4 @@ COPY . .
 RUN npm run build
 
 EXPOSE 8080
-CMD [ "http-server", "dist" ]
+CMD [ "npm", "run", "dev" ]
