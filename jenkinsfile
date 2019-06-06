@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-      any
-    }
+    agent any
     environment {
         registry = "orantoine/fortnite-front"
         registryCredential = 'dockerhub'
