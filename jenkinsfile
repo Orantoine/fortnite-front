@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     environment {
         registry = "orantoine/fortnite-front"
         registryCredential = 'dockerhub'
@@ -7,6 +7,11 @@ pipeline {
     }
     stages {
         stage ('Build') {
+            agent {
+                docker {
+                  image node
+                }
+            }
             steps {
                 sh 'npm install --ignore-scripts'
             }
