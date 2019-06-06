@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:10.9-slim
 
 # installe un simple serveur http pour servir un contenu statique
 RUN npm install -g http-server
@@ -11,6 +11,7 @@ COPY package*.json ./
 
 # installe les dépendances du projet
 RUN npm install
+RUN npm i -g @vue/cli
 
 # copie les fichiers et dossiers du projet dans le dossier de travail (par exemple : le dossier 'app')
 COPY . .
@@ -19,4 +20,4 @@ COPY . .
 RUN npm run build
 
 EXPOSE 8070
-CMD [ "http-server", "dist" ]
+CMD [ "npm", "run", "dev" ]
